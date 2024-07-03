@@ -27,15 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MoviesAppTheme {
-                val pagerState = rememberPagerState {
-                    10
-                }
-               VerticalPager(state = pagerState) {
-                   Text(
-                       text = "Page: $pagerState",
-                       modifier = Modifier.fillMaxWidth()
-                   )
-               }
+
             }
         }
     }
