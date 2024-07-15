@@ -21,21 +21,26 @@ import com.example.moviesapp.ui.browse.Browse
 import com.example.moviesapp.ui.composable.IconButton
 import com.example.moviesapp.ui.home.Home
 import com.example.moviesapp.ui.search.Search
-import com.example.moviesapp.ui.theme.LightBlack
+import com.example.moviesapp.theme.Black
+import com.example.moviesapp.theme.LightBlack
+import com.example.moviesapp.viewmodel.MainViewModel
 
 @Composable
-fun MovieApp() {
-    MyBottomAppBar()
+fun MovieApp(viewModel: MainViewModel) {
+    MovieAppContent(viewModel = viewModel)
 }
 
 @Composable
-fun MyBottomAppBar() {
+fun MovieAppContent(
+    viewModel: MainViewModel
+) {
     val navController = rememberNavController()
     val selected = remember {
         mutableStateOf(Icons.Default.Home)
     }
 
     Scaffold(
+        containerColor = Black,
         bottomBar = {
             BottomAppBar(
                 containerColor = LightBlack,
@@ -76,7 +81,7 @@ fun MyBottomAppBar() {
             startDestination = Screens.Home.screen,
             modifier = Modifier.padding(it),
         ) {
-            composable(Screens.Home.screen) { Home() }
+            composable(Screens.Home.screen) { Home(viewModel = viewModel) }
             composable(Screens.Search.screen) { Search() }
             composable(Screens.Browse.screen) { Browse() }
             composable(Screens.Watchlist.screen) { Watchlist() }
@@ -89,5 +94,5 @@ fun MyBottomAppBar() {
 @Composable
 @Preview(showSystemUi = true)
 fun MovieAppPreview() {
-    MovieApp()
+    MovieApp(MainViewModel())
 }

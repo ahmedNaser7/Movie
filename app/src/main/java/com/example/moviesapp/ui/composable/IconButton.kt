@@ -28,7 +28,7 @@ fun IconButton(
         onClick = {
             selected.value = if (resourceImage==null) imageVector!! else icon
             navController.navigate(name) {
-                popUpTo(0)
+                popUpToId
             }
         },
         modifier = modifier

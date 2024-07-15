@@ -1,4 +1,4 @@
-package com.example.moviesapp.ui.theme
+package com.example.moviesapp.theme
 
 import android.app.Activity
 import android.os.Build
@@ -23,7 +23,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = Yellow,
     secondary = PurpleGrey40,
     tertiary = Pink40
 
