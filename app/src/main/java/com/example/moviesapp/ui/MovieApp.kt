@@ -1,28 +1,31 @@
 package com.example.moviesapp.ui
 
 
-import androidx.compose.foundation.layout.padding
+
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.moviesapp.R
-import com.example.moviesapp.ui.Watchlist.Watchlist
-import com.example.moviesapp.ui.browse.Browse
-import com.example.moviesapp.ui.composable.IconButton
-import com.example.moviesapp.ui.home.Home
-import com.example.moviesapp.ui.search.Search
+import com.example.moviesapp.navigation.MovieAppNavHost
 import com.example.moviesapp.theme.Black
 import com.example.moviesapp.theme.LightBlack
+import com.example.moviesapp.theme.Orange
 import com.example.moviesapp.viewmodel.MainViewModel
 
 @Composable
@@ -50,46 +53,68 @@ fun MovieAppContent(
                     selected = selected,
                     navController = navController,
                     imageVector = Icons.Default.Home,
-                    name = "Home"
+                    name = "Home",
                 )
+
                 IconButton(
                     modifier = Modifier.weight(1f),
                     selected = selected,
                     navController = navController,
                     imageVector = Icons.Default.Search,
-                    name = "Search"
+                    name = "Search",
                 )
                 IconButton(
                     modifier = Modifier.weight(1f),
                     selected = selected,
                     navController = navController,
                     resourceImage = R.drawable.icon_browse,
-                    name = "Browse"
+                    name = "Browse",
                 )
                 IconButton(
                     modifier = Modifier.weight(1f),
                     selected = selected,
                     navController = navController,
                     resourceImage = R.drawable.icon_watchlist,
-                    name = "Watchlist"
+                    name = "Watchlist",
                 )
             }
         }
     ) {
-        NavHost(
-            navController = navController,
-            startDestination = Screens.Home.screen,
-            modifier = Modifier.padding(it),
-        ) {
-            composable(Screens.Home.screen) { Home(viewModel = viewModel) }
-            composable(Screens.Search.screen) { Search() }
-            composable(Screens.Browse.screen) { Browse() }
-            composable(Screens.Watchlist.screen) { Watchlist() }
-        }
+       MovieAppNavHost(navController = navController, viewModel = viewModel, paddingValues = it)
 
     }
 }
 
+@Composable
+fun IconButton(
+    modifier: Modifier,
+    selected: MutableState<ImageVector>,
+    navController: NavHostController,
+    resourceImage: Int? = null,
+    imageVector: ImageVector? = null,
+    name: String
+) {
+    val icon = ImageVector.vectorResource(id = resourceImage ?: R.drawable.ic_launcher_background)
+
+    androidx.compose.material3.IconButton(
+        onClick = {
+            selected.value = if (resourceImage == null) imageVector!! else icon
+            navController.navigate(name) {
+                popUpTo(0)
+            }
+        },
+        modifier = modifier
+    ) {
+
+        Icon(
+            imageVector = if (resourceImage == null) imageVector!! else icon,
+            contentDescription = name,
+            modifier = Modifier.size(30.dp),
+            tint = if (selected.value == if (resourceImage == null) imageVector!! else icon) Orange else Color.White
+        )
+
+    }
+}
 
 @Composable
 @Preview(showSystemUi = true)

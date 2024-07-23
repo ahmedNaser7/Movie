@@ -1,11 +1,9 @@
 package com.example.moviesapp.ui.Watchlist
 
-import android.graphics.LinearGradient
-import androidx.compose.animation.core.LinearEasing
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,13 +16,11 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -92,8 +88,8 @@ fun RowItem(item: MovieUi) {
             Icon(
                 modifier = Modifier
                     .fillMaxSize()
-                    .size(35.dp)
-                    .padding(top = 17.dp, end = 390.dp),
+                    .size(36.dp)
+                    .padding(top = 13.dp, end = 330.dp),
                 imageVector = Icons.Default.Done,
                 tint = White,
                 contentDescription =""

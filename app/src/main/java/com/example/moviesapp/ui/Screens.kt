@@ -5,4 +5,6 @@ sealed class Screens(val screen:String) {
     data object Search:Screens("Search")
     data object Browse:Screens("Browse")
     data object Watchlist:Screens("Watchlist")
+    data object MovieDetails:Screens("MovieDetails")
+    data object BrowseDetails:Screens("BrowseDetails")
 }

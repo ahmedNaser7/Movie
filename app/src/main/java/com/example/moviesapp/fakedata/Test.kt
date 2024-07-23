@@ -1,8 +1,7 @@
 package com.example.moviesapp.fakedata
 
 import com.example.moviesapp.R
-import com.example.moviesapp.data.model.Movie
-import java.util.Locale.Category
+import com.example.moviesapp.data.model.movie.Movie
 
 object Test {
     val movies = listOf(
@@ -12,7 +11,7 @@ object Test {
             overview = "Description 1",
             posterPath = "poster1.jpg",
             adult = true,
-            backdropPath = "backdrop1.jpg",
+            backdropPath = "vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
             genreIds = listOf(1, 2, 3),
             originalLanguage = "en",
             originalTitle = "Original Title 1",
@@ -41,77 +40,77 @@ object Test {
     )
 
     val CategoryItems = listOf(
-        Category(
+        FakeCategory(
             id = 1,
             name = "Action",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 2,
             name = "Comedy",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 3,
             name = "Drama",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 4,
             name = "Horror",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 5,
             name = "Romance",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 6,
             name = "Thriller",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 7,
             name = "Adventure",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 8,
             name = "Animation",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 9,
             name = "Documentary",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 10,
             name = "Family",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 11,
             name = "Fantasy",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 12,
             name = "History",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 13,
             name = "Mystery",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 14,
             name = "Science Fiction",
             image = R.drawable.img_cate
         ),
-        Category(
+        FakeCategory(
             id = 15,
             name = "TV Movie",
             image = R.drawable.img_cate

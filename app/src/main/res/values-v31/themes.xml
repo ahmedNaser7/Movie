@@ -5,6 +5,5 @@
         <item name="android:windowSplashScreenBackground">@color/black</item>
         <item name="android:windowSplashScreenAnimatedIcon" tools:ignore="PrivateResource">@drawable/icon_background</item>
         <item name="android:windowSplashScreenAnimationDuration">3000</item>
-        <item name="android:windowSplashScreenBrandingImage">@drawable/ic_branding</item>
     </style>
 </resources>

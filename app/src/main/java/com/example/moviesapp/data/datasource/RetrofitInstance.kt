@@ -1,6 +1,5 @@
 package com.example.moviesapp.data.datasource
 
-import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
     private const val BASE_URL = "https://api.themoviedb.org/3/"
-
+    const  val imageUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/"
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.HEADERS
     }
@@ -25,8 +24,8 @@ object RetrofitInstance {
             .build()
     }
 
-    val movieService: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
+    val movieService: MovieService by lazy {
+        retrofit.create(MovieService::class.java)
     }
 
 }
