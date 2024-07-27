@@ -9,8 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.moviesapp.data.model.movie.Movie
-import com.example.moviesapp.ui.Screens
+import com.example.moviesapp.ui.MovieAppScreen
 import com.example.moviesapp.ui.Watchlist.Watchlist
 import com.example.moviesapp.ui.browse.Browse
 import com.example.moviesapp.ui.browse.BrowseDetails
@@ -28,16 +27,15 @@ fun MovieAppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.Home.screen,
+        startDestination = MovieAppScreen.Home.route,
         modifier = Modifier.padding(paddingValues),
     ) {
-        composable(Screens.Home.screen)
-        { Home(viewModel = viewModel, navController = navController) }
-        composable(Screens.Search.screen) { Search(viewModel) }
-        composable(Screens.Browse.screen) { Browse(viewModel,navController) }
-        composable(Screens.Watchlist.screen) { Watchlist() }
+        composable(MovieAppScreen.Home.route)   { Home(viewModel,navController)  }
+        composable(MovieAppScreen.Search.route) { Search(viewModel,navController) }
+        composable(MovieAppScreen.Browse.route) { Browse(viewModel,navController) }
+        composable(MovieAppScreen.Watchlist.route) { Watchlist(viewModel) }
         composable(
-            Screens.MovieDetails.screen + "/{movieId}",
+            MovieAppScreen.MovieDetails.route + "/{movieId}",
             arguments = listOf(navArgument("movieId") { type = NavType.StringType })
         )
         {entry ->
@@ -45,7 +43,7 @@ fun MovieAppNavHost(
         }
 
         composable(
-            Screens.BrowseDetails.screen + "/{categoryId}",
+            MovieAppScreen.BrowseDetails.route + "/{categoryId}",
             arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
         )
         {entry ->

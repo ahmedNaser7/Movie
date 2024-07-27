@@ -1,8 +1,10 @@
 package com.example.moviesapp.ui.home
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -45,6 +47,7 @@ import com.example.moviesapp.R
 import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
 import com.example.moviesapp.fakedata.Test
+import com.example.moviesapp.fakedata.Test.watchListItems
 import com.example.moviesapp.theme.Black
 import com.example.moviesapp.theme.DarkGray
 import com.example.moviesapp.theme.LightGray
@@ -53,7 +56,6 @@ import com.example.moviesapp.theme.Yellow
 import com.example.moviesapp.theme.backgroundGray
 import com.example.moviesapp.viewmodel.MainViewModel
 import com.google.accompanist.glide.rememberGlidePainter
-
 
 
 @Composable
@@ -96,7 +98,7 @@ fun Home(viewModel: MainViewModel,navController: NavController) {
             ) {
                 itemsIndexed(releasesMovies) { index , item ->
                     Spacer(modifier = Modifier.width(12.dp))
-                    RowItemsReleases(item)
+                    RowItemsReleases(item,navController)
                 }
             }
         }
@@ -125,7 +127,7 @@ fun Home(viewModel: MainViewModel,navController: NavController) {
             ) {
                 itemsIndexed(recommendedMovies) { index , item ->
                     Spacer(modifier = Modifier.width(12.dp))
-                    RowItemsRecommended(item)
+                    RowItemsRecommended(item,navController)
                 }
 
             }
@@ -177,7 +179,11 @@ fun RecommendationMovie(lastMovie: Movie, navController: NavController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 140.dp, start = 20.dp),
+                .padding(top = 140.dp, start = 20.dp)
+                .clickable {
+                    navController.navigate("MovieDetails/${movie.id}")
+                }
+            ,
         ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
@@ -193,7 +199,11 @@ fun RecommendationMovie(lastMovie: Movie, navController: NavController) {
             Icon(
                 modifier = Modifier
                     .padding(4.dp)
-                    .size(19.dp),
+                    .size(19.dp)
+                    .clickable {
+                        watchListItems.add(movie.id!!)
+                    }
+                ,
                 tint = Color.White,
                 imageVector = Icons.Default.Add,
                 contentDescription = ""
@@ -222,7 +232,7 @@ fun RecommendationMovie(lastMovie: Movie, navController: NavController) {
 
 
 @Composable
-fun RowItemsRecommended(movie:Movie) {
+fun RowItemsRecommended(movie:Movie,navController: NavController) {
         Box(
             modifier = Modifier
                 .height(193.dp)
@@ -230,6 +240,9 @@ fun RowItemsRecommended(movie:Movie) {
                 .background(DarkGray)
                 .clip(RoundedCornerShape(4.dp))
                 .shadow(1.dp, spotColor = Black)
+                .clickable {
+                    navController.navigate("MovieDetails/${movie.id}")
+                }
 
         ) {
             Image(
@@ -253,7 +266,9 @@ fun RowItemsRecommended(movie:Movie) {
                 modifier = Modifier
                     .size(35.dp)
                     .padding(bottom = 10.dp, end = 11.dp),
-                onClick = {  }
+                onClick = {
+                    watchListItems.add(movie.id!!)
+                }
             ) {
                 Icon(
                     tint = Color.White,
@@ -304,11 +319,14 @@ fun RowItemsRecommended(movie:Movie) {
 }
 
 @Composable
-fun RowItemsReleases(movie: Movie) {
+fun RowItemsReleases(movie: Movie,navController: NavController) {
     Box(
         modifier = Modifier
             .height(150.dp) //Todo (edit it to 180.dp)
             .width(100.dp)
+            .clickable {
+                navController.navigate("MovieDetails/${movie.id}")
+            }
     ) {
         Image(
             modifier = Modifier
@@ -331,7 +349,9 @@ fun RowItemsReleases(movie: Movie) {
             modifier = Modifier
                 .size(35.dp)
                 .padding(bottom = 10.dp, end = 10.dp),
-            onClick = {  }
+            onClick = {
+                watchListItems.add(movie.id!!)
+            }
         ) {
             Icon(
                 tint =  Color.White,

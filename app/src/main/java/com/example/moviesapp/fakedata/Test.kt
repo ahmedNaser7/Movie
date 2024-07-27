@@ -4,6 +4,10 @@ import com.example.moviesapp.R
 import com.example.moviesapp.data.model.movie.Movie
 
 object Test {
+
+    val watchListItems:MutableList<Int> = mutableListOf()
+    val watchListMovies = mutableSetOf<Movie>()
+
     val movies = listOf(
         Movie(
             id = 1,

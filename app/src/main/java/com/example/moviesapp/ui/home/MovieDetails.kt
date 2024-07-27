@@ -4,6 +4,7 @@ package com.example.moviesapp.ui.home
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -51,6 +52,7 @@ import androidx.navigation.NavController
 import com.example.moviesapp.R
 import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
+import com.example.moviesapp.fakedata.Test.watchListItems
 import com.example.moviesapp.theme.Black
 import com.example.moviesapp.theme.DarkGray
 import com.example.moviesapp.theme.MyGray
@@ -113,15 +115,6 @@ fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:S
               painter = rememberGlidePainter(request = imageUrl + movie.backdropPath),
               contentDescription = "image_discover"
           )
-//          IconButton(
-//              modifier = Modifier.fillMaxSize(),
-//              onClick = {}
-//          ) {
-//              Image(
-//                  painter = painterResource(id = R.drawable.icon_play),
-//                  contentDescription = "image_discover"
-//              )
-//          }
       }
       Text(
           modifier = Modifier.padding(start = 22.dp,top = 10.dp),
@@ -159,7 +152,10 @@ fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:S
           Icon(
               modifier = Modifier
                   .padding(4.dp)
-                  .size(19.dp),
+                  .size(19.dp)
+                  .clickable {
+                      watchListItems.add(movie.id!!)
+                  },
               tint = Color.White,
               imageVector = Icons.Default.Add,
               contentDescription = ""
@@ -237,7 +233,7 @@ fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:S
           ) {
               itemsIndexed(similarMovies) {index,item ->
                   Spacer(modifier = Modifier.width(12.dp))
-                  RowItems(item)
+                  RowItem(item,navController)
               }
 
           }
@@ -251,7 +247,7 @@ fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:S
 }
 
 @Composable
-fun RowItems(movie: Movie) {
+fun RowItem(movie: Movie,navController: NavController) {
     Box(
         modifier = Modifier
             .height(193.dp)
@@ -259,6 +255,9 @@ fun RowItems(movie: Movie) {
             .background(DarkGray)
             .clip(RoundedCornerShape(4.dp))
             .shadow(1.dp, spotColor = Black)
+            .clickable {
+                navController.navigate("MovieDetails/${movie.id}")
+            }
 
     ) {
         Image(
@@ -282,7 +281,9 @@ fun RowItems(movie: Movie) {
             modifier = Modifier
                 .size(35.dp)
                 .padding(bottom = 10.dp, end = 11.dp),
-            onClick = {  }
+            onClick = {
+                watchListItems.add(movie.id!!)
+            }
         ) {
             Icon(
                 tint = Color.White,

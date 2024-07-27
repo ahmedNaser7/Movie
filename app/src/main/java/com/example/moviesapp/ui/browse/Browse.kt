@@ -111,7 +111,6 @@ fun GridItem(item : Category,navController: NavController) {
 
         }
 
-       // TODO(" black background to make the pic more dark")
     }
 }
 

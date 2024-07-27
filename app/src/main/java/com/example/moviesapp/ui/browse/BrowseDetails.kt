@@ -1,6 +1,7 @@
 package com.example.moviesapp.ui.browse
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +39,7 @@ import com.google.accompanist.glide.rememberGlidePainter
 fun BrowseDetails(viewModel: MainViewModel,cateId:String,navController: NavController){
     val moviesOfCategory = viewModel.categoryMovies
     BrowseDetailsAppBar(navController)
-    MovieBrowseList(moviesOfCategory)
+    MovieBrowseList(moviesOfCategory,navController)
     LaunchedEffect(Unit) {
         viewModel.getMoviesByCate(cateId)
     }
@@ -69,14 +70,14 @@ fun BrowseDetailsAppBar(navController:NavController) {
 }
 
 @Composable
-fun MovieBrowseList(moviesList: List<Movie>) {
+fun MovieBrowseList(moviesList: List<Movie>,navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 40.dp, start = 12.dp, end = 10.dp)
     ) {
         itemsIndexed(moviesList) { index, item ->
-            RowItemBrowse(item)
+            RowItemBrowse(item,navController)
             Spacer(modifier = Modifier.height(10.dp))
             LineSpacer()
             Spacer(modifier = Modifier.height(10.dp))
@@ -85,11 +86,14 @@ fun MovieBrowseList(moviesList: List<Movie>) {
 }
 
 @Composable
-fun RowItemBrowse(movie: Movie) {
+fun RowItemBrowse(movie: Movie,navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 5.dp, end = 8.dp)
+            .clickable {
+                navController.navigate("movie_details/${movie.id}")
+            }
     ) {
         Image(
             modifier = Modifier

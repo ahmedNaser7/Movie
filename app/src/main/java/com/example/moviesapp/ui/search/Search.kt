@@ -1,7 +1,9 @@
 package com.example.moviesapp.ui.search
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -24,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.moviesapp.R
 import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
@@ -34,35 +37,39 @@ import com.example.moviesapp.viewmodel.MainViewModel
 import com.google.accompanist.glide.rememberGlidePainter
 
 @Composable
-fun Search(viewModel: MainViewModel) {
+fun Search(viewModel: MainViewModel,navController: NavController) {
     var query by remember { mutableStateOf("") }
     val movies = viewModel.searchedMovies
-        searchBox(query) { newQuery ->
+        SearchBox(query) { newQuery ->
             query = newQuery
             viewModel.getSearchingMovies(query)
+            // after input the word there is a problem of call function again and again
         }
+
         if(movies.lastIndex == 0 || movies.isEmpty()) {
             Image(
-                modifier = Modifier.fillMaxSize().padding(140.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(140.dp),
                 alignment = Alignment.CenterEnd,
                 painter = painterResource(id = R.drawable.img_not_found),
                 contentDescription = " "
             )
         }else{
-            MovieList(movies)
+            MovieList(movies,navController)
         }
 
 }
 
 @Composable
-fun MovieList(moviesList: List<Movie>) {
+fun MovieList(moviesList: List<Movie>,navController: NavController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 80.dp, start = 12.dp, end = 10.dp)
     ) {
         itemsIndexed(moviesList) { index, item ->
-            RowItemSearch(item)
+            RowItemSearch(item, navController)
             Spacer(modifier = Modifier.height(10.dp))
             LineSpacer()
             Spacer(modifier = Modifier.height(10.dp))
@@ -71,7 +78,7 @@ fun MovieList(moviesList: List<Movie>) {
 }
 
 @Composable
-fun searchBox(query: String, onQueryChange: (String) -> Unit) {
+fun SearchBox(query: String, onQueryChange: (String) -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -121,11 +128,15 @@ fun searchBox(query: String, onQueryChange: (String) -> Unit) {
 }
 
 @Composable
-fun RowItemSearch(movie: Movie) {
+fun RowItemSearch(movie: Movie,navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 5.dp, end = 8.dp)
+            .clickable {
+                Log.d("TAG", "RowItemSearch: ${movie.id}")
+                navController.navigate("MovieDetails/${movie.id}")
+            }
     ) {
         Image(
             modifier = Modifier
@@ -171,5 +182,5 @@ fun RowItemSearch(movie: Movie) {
 @Composable
 @Preview(showSystemUi = true, backgroundColor = 0xFF000000, showBackground = true)
 fun PreviewSearch() {
-    Search(viewModel = MainViewModel())
+//    Search(viewModel = MainViewModel())
 }
