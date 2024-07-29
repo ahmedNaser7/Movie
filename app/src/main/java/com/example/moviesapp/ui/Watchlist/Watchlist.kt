@@ -100,21 +100,6 @@ fun RowItem(item: Movie) {
                 painter = rememberGlidePainter(request = imageUrl + item.posterPath),
                 contentDescription = ""
             )
-            Icon(
-                modifier = Modifier.padding(top = 3.dp),
-                tint = Orange,
-                painter = painterResource(id = R.drawable.ic_bookmark),
-                contentDescription = ""
-            )
-            Icon(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .size(36.dp)
-                    .padding(top = 3.dp, end = 330.dp),
-                imageVector = Icons.Default.Done,
-                tint = White,
-                contentDescription = ""
-            )
             Text(
                 modifier = Modifier
                     .fillMaxSize()
