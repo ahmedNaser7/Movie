@@ -1,6 +1,6 @@
-# Chat Application
+# Movie Application
 
-This is a simple chat application that allows users to register, login, and chat with their friends or family in different rooms. The application uses Firebase for authentication and real-time database, Room for local data storage, LiveData for observing data changes, and ViewModel for managing UI-related data.
+A simple and easy-to-use movie application built with Jetpack Compose and Kotlin, utilizing Retrofit for API calls. The app displays new releases and recommended movies, allows users to search for movies, and add them to their watchlist
 
 ## Screenshots
 
@@ -8,19 +8,18 @@ This is a simple chat application that allows users to register, login, and chat
 
 ## Features
 
-- User Registration and Login
-- Create and Join Chat Rooms
-- Real-time Messaging
-- Local Data Storage with Room
-- Data Observation with LiveData
-- UI State Management with ViewModel
+- Home 
+- Movie Details
+- Search
+- Browse 
+- Browse Details
+- WatchList
 
 ## Technologies Used
 
-- [Firebase Authentication](https://firebase.google.com/docs/auth)
-- [Firebase Realtime Database](https://firebase.google.com/docs/database)
-- [Room Persistence Library](https://developer.android.com/training/data-storage/room)
-- [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+- [Jetpack Compose](https://developer.android.com/compose)
+- [Retrofit ](https://square.github.io/retrofit/)
+- [The Movie Database (TMDb) API](https://developer.themoviedb.org/docs/getting-started)
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
 ## Getting Started
@@ -34,7 +33,7 @@ This is a simple chat application that allows users to register, login, and chat
 
 1. Clone the repository:
     ```sh
-    https://github.com/ahmedNaser7/Chat.git
+    https://github.com/ahmedNaser7/Movie.git
     ```
 2. Open the project in Android Studio.
 
@@ -44,19 +43,9 @@ This is a simple chat application that allows users to register, login, and chat
 
 ### Configuration
 
-1. Set up Firebase Authentication:
-    - Enable Email/Password authentication in the Firebase console.
+. Set up api Authentication:
+    - read the document of Movie Api
 
-2. Set up Firebase Realtime Database:
-    - Add the required database rules in the Firebase console to allow read and write access.
-
-### Usage
-
-1. **Register**: Create a new account using an email and password.
-2. **Login**: Access the application using the registered credentials.
-3. **Create Room**: Create a new chat room to start a conversation.
-4. **Join Room**: Join an existing chat room using the room ID.
-5. **Chat**: Send and receive messages in real-time.
 
 ## Architecture
 
