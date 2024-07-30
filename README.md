@@ -37,9 +37,7 @@ A simple and easy-to-use movie application built with Jetpack Compose and Kotlin
     ```
 2. Open the project in Android Studio.
 
-3. Add your `google-services.json` file to the `app` directory.
-
-4. Sync the project with Gradle files.
+3. Sync the project with Gradle files.
 
 ### Configuration
 
