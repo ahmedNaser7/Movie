@@ -4,7 +4,7 @@ This is a simple chat application that allows users to register, login, and chat
 
 ## Screenshots
 
-<img src="Screenshot Movie.png" alt="Screenshot">
+<img src="Screenshot Movie .png" alt="Screenshot">
 
 ## Features
 
