@@ -1,7 +1,6 @@
 package com.example.moviesapp.ui.home
 
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,31 +34,29 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.moviesapp.R
-import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
+import com.example.moviesapp.data.datasource.network.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
-import com.example.moviesapp.fakedata.Test
-import com.example.moviesapp.fakedata.Test.watchListItems
+import com.example.moviesapp.data.datasource.localdata.LocalData
+import com.example.moviesapp.data.datasource.localdata.LocalData.watchListItems
 import com.example.moviesapp.theme.Black
 import com.example.moviesapp.theme.DarkGray
 import com.example.moviesapp.theme.LightGray
 import com.example.moviesapp.theme.MyGray
 import com.example.moviesapp.theme.Yellow
 import com.example.moviesapp.theme.backgroundGray
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.viewmodel.MovieViewModel
 import com.google.accompanist.glide.rememberGlidePainter
 
 
 @Composable
-fun Home(viewModel: MainViewModel,navController: NavController) {
+fun Home(viewModel: MovieViewModel, navController: NavController) {
 
     val recommendedMovies by viewModel.popularMovies.collectAsState()
     val releasesMovies = viewModel.releasesMovies
@@ -146,7 +143,7 @@ fun Home(viewModel: MainViewModel,navController: NavController) {
 @Composable
 fun RecommendationMovie(lastMovie: Movie, navController: NavController) {
     val movie =  if (lastMovie.id == null) {
-        Test.movies[0]
+        LocalData.movies[0]
     } else {
         lastMovie
     }
@@ -283,8 +280,8 @@ fun RowItemsRecommended(movie:Movie,navController: NavController) {
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(17.dp)
-                        .padding(top = 7.dp),
+                        .size(12.dp)
+                        .padding(top = 3.dp),
                     painter = painterResource(id = R.drawable.ic_star),
                     tint = Yellow,
                     contentDescription = ""
@@ -322,7 +319,7 @@ fun RowItemsRecommended(movie:Movie,navController: NavController) {
 fun RowItemsReleases(movie: Movie,navController: NavController) {
     Box(
         modifier = Modifier
-            .height(150.dp) //Todo (edit it to 180.dp)
+            .height(150.dp)
             .width(100.dp)
             .clickable {
                 navController.navigate("MovieDetails/${movie.id}")
@@ -362,10 +359,5 @@ fun RowItemsReleases(movie: Movie,navController: NavController) {
     }
 }
 
-@Composable
-@Preview(showSystemUi = true, backgroundColor = 0xFF000000, showBackground = true)
-fun PreviewHome() {
-    Home(viewModel = MainViewModel(),navController = NavController(LocalContext.current))
-}
 
 

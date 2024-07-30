@@ -1,9 +1,8 @@
 package com.example.moviesapp.ui.search
 
-import android.util.Log
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -22,22 +21,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.moviesapp.R
-import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
+import com.example.moviesapp.data.datasource.network.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
 import com.example.moviesapp.theme.LightGray
 import com.example.moviesapp.theme.TranspositionWhite
 import com.example.moviesapp.ui.Watchlist.LineSpacer
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.viewmodel.MovieViewModel
 import com.google.accompanist.glide.rememberGlidePainter
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
-fun Search(viewModel: MainViewModel,navController: NavController) {
+fun Search(viewModel: MovieViewModel, navController: NavController) {
     var query by remember { mutableStateOf("") }
     val movies = viewModel.searchedMovies
         SearchBox(query) { newQuery ->
@@ -133,10 +131,6 @@ fun RowItemSearch(movie: Movie,navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 5.dp, end = 8.dp)
-            .clickable {
-                Log.d("TAG", "RowItemSearch: ${movie.id}")
-                navController.navigate("MovieDetails/${movie.id}")
-            }
     ) {
         Image(
             modifier = Modifier
@@ -179,8 +173,4 @@ fun RowItemSearch(movie: Movie,navController: NavController) {
     }
 }
 
-@Composable
-@Preview(showSystemUi = true, backgroundColor = 0xFF000000, showBackground = true)
-fun PreviewSearch() {
-//    Search(viewModel = MainViewModel())
-}
+

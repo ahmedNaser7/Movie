@@ -1,4 +1,4 @@
-package com.example.moviesapp.ui
+package com.example.moviesapp.ui.screens
 
 enum class MovieAppScreen(val route: String) {
     Home("home"),

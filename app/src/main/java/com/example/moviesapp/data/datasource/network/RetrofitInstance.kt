@@ -1,4 +1,4 @@
-package com.example.moviesapp.data.datasource
+package com.example.moviesapp.data.datasource.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

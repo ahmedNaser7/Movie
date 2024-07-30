@@ -9,20 +9,20 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.moviesapp.ui.MovieAppScreen
+import com.example.moviesapp.ui.screens.MovieAppScreen
 import com.example.moviesapp.ui.Watchlist.Watchlist
 import com.example.moviesapp.ui.browse.Browse
 import com.example.moviesapp.ui.browse.BrowseDetails
 import com.example.moviesapp.ui.home.Home
 import com.example.moviesapp.ui.home.MovieDetails
 import com.example.moviesapp.ui.search.Search
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.viewmodel.MovieViewModel
 
 
 @Composable
 fun MovieAppNavHost(
     navController: NavHostController,
-    viewModel: MainViewModel,
+    viewModel: MovieViewModel,
     paddingValues: PaddingValues
 ) {
     NavHost(

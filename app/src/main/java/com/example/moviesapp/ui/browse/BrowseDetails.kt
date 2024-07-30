@@ -1,7 +1,6 @@
 package com.example.moviesapp.ui.browse
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,21 +21,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
+import com.example.moviesapp.data.datasource.network.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
 import com.example.moviesapp.ui.Watchlist.LineSpacer
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.viewmodel.MovieViewModel
 import com.google.accompanist.glide.rememberGlidePainter
 
 
 @Composable
-fun BrowseDetails(viewModel: MainViewModel,cateId:String,navController: NavController){
+fun BrowseDetails(viewModel: MovieViewModel, cateId:String, navController: NavController){
     val moviesOfCategory = viewModel.categoryMovies
     BrowseDetailsAppBar(navController)
     MovieBrowseList(moviesOfCategory,navController)
@@ -91,9 +88,6 @@ fun RowItemBrowse(movie: Movie,navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 5.dp, end = 8.dp)
-            .clickable {
-                navController.navigate("movie_details/${movie.id}")
-            }
     ) {
         Image(
             modifier = Modifier
@@ -136,8 +130,3 @@ fun RowItemBrowse(movie: Movie,navController: NavController) {
     }
 }
 
-@Composable
-@Preview(showSystemUi = true)
-fun PreviewBrowseDetails() {
-    BrowseDetails(MainViewModel(),"19",navController = NavController(LocalContext.current))
-}

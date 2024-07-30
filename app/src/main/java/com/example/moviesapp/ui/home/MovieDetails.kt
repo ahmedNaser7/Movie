@@ -40,32 +40,30 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.moviesapp.R
-import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
+import com.example.moviesapp.data.datasource.network.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
-import com.example.moviesapp.fakedata.Test.watchListItems
+import com.example.moviesapp.data.datasource.localdata.LocalData.watchListItems
 import com.example.moviesapp.theme.Black
 import com.example.moviesapp.theme.DarkGray
 import com.example.moviesapp.theme.MyGray
 import com.example.moviesapp.theme.LightGray
 import com.example.moviesapp.theme.Yellow
 import com.example.moviesapp.theme.backgroundGray
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.viewmodel.MovieViewModel
 import com.google.accompanist.glide.rememberGlidePainter
 
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:String){
+fun MovieDetails(navController: NavController, viewModel: MovieViewModel, movieId:String){
     val movie by viewModel.movie.collectAsState()
     val similarMovies = viewModel.similarMovies
     Column(
@@ -160,7 +158,7 @@ fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:S
               imageVector = Icons.Default.Add,
               contentDescription = ""
           )
-          // TODO( layout squre and the details)
+
           FlowRow(
              modifier = Modifier.padding(start = 165.dp, end = 13.dp),
           ){
@@ -187,8 +185,8 @@ fun MovieDetails(navController: NavController,viewModel: MainViewModel,movieId:S
           ) {
               Icon(
                   modifier = Modifier
-                      .size(17.dp)
-                      .padding(top = 7.dp),
+                      .size(12.dp)
+                      .padding(top = 3.dp),
                   painter = painterResource(id = R.drawable.ic_star),
                   tint = Yellow,
                   contentDescription = ""
@@ -298,8 +296,8 @@ fun RowItem(movie: Movie,navController: NavController) {
         ) {
             Icon(
                 modifier = Modifier
-                    .size(17.dp)
-                    .padding(top = 7.dp),
+                    .size(12.dp)
+                    .padding(top = 3.dp),
                 painter = painterResource(id = R.drawable.ic_star),
                 tint = Yellow,
                 contentDescription = ""
@@ -308,7 +306,8 @@ fun RowItem(movie: Movie,navController: NavController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 3.dp, top = 1.dp),
-                text = movie.voteAverage.toString()?:"",
+                text = movie.voteAverage.toString(),
+                maxLines = 1,
                 color = Color.White,
                 fontSize = 11.sp
             )
@@ -319,6 +318,7 @@ fun RowItem(movie: Movie,navController: NavController) {
                 .fillMaxSize()
                 .padding(start = 5.dp, top = 162.dp),
             text = movie.title?:"",
+            maxLines = 1,
             color = Color.White,
             fontSize = 10.sp
         )
@@ -327,6 +327,7 @@ fun RowItem(movie: Movie,navController: NavController) {
                 .fillMaxSize()
                 .padding(start = 5.dp, top = 173.dp),
             text = movie.releaseDate?:"",
+            maxLines = 1,
             color = Color.White,
             fontSize = 10.sp
         )
@@ -350,15 +351,12 @@ fun ChipItem(text: String) {
         ),
     ){
          Text(
-             modifier = Modifier.padding(start = 11.dp),
+             modifier = Modifier.padding(start = 4.dp, top = 3.dp),
              text = text,
+             textAlign = TextAlign.Center,
+             maxLines = 1,
              fontSize = 11.sp
          )
     }
 }
 
-@Composable
-@Preview(showSystemUi = true, showBackground = true, backgroundColor = 0xFF000000)
-fun PreviewMovieDetails(){
-    MovieDetails(NavController(LocalContext.current),MainViewModel(), movieId = "272")
-}

@@ -10,13 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,22 +21,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.moviesapp.R
-import com.example.moviesapp.data.datasource.RetrofitInstance.imageUrl
+import com.example.moviesapp.data.datasource.network.RetrofitInstance.imageUrl
 import com.example.moviesapp.data.model.movie.Movie
-import com.example.moviesapp.fakedata.Test.watchListItems
-import com.example.moviesapp.fakedata.Test.watchListMovies
-import com.example.moviesapp.theme.Orange
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.data.datasource.localdata.LocalData.watchListItems
+import com.example.moviesapp.data.datasource.localdata.LocalData.watchListMovies
+import com.example.moviesapp.viewmodel.MovieViewModel
 import com.google.accompanist.glide.rememberGlidePainter
 
 @Composable
-fun Watchlist(viewModel: MainViewModel) {
+fun Watchlist(viewModel: MovieViewModel) {
     val movie by viewModel.movie.collectAsState()
     Log.d("WATCHLIST", "movie: ${watchListMovies.size}")
     Text(
@@ -132,10 +124,4 @@ fun RowItem(item: Movie) {
             )
         }
     }
-}
-
-@Composable
-@Preview(showSystemUi = true, backgroundColor = 0xFF000000, showBackground = true)
-fun PreviewWatchlist() {
-    Watchlist(MainViewModel())
 }

@@ -1,25 +1,24 @@
-package com.example.moviesapp.data.datasource
+package com.example.moviesapp.data.datasource.network
 
 import com.example.moviesapp.data.model.category.CategoryResponse
 import com.example.moviesapp.data.model.movie.Movie
 import com.example.moviesapp.data.model.movie.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 
 interface MovieService {
-    @GET("movie/popular?language=en-US&page=3")
+    @GET("movie/popular?language=en-US")
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTFiZmJjYWZhMjgyMmNlMmZlNWUwYzJmNzVmNGUzOCIsIm5iZiI6MTcyMDQ0NDMxOS45MzcxNzgsInN1YiI6IjY2ODkzMzJjN2M0MmZjMTA3MjllZGY3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9IFGousfc_G-F8eewOmrv3ehTOh4LumXn4QKtUorOqQ")
-    suspend fun getPopularMovies(): MovieResponse
+    suspend fun getPopularMovies(@Query("page")page:String): MovieResponse
 
     @GET("trending/movie/day?language=en-US")
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTFiZmJjYWZhMjgyMmNlMmZlNWUwYzJmNzVmNGUzOCIsIm5iZiI6MTcyMDQ0NDMxOS45MzcxNzgsInN1YiI6IjY2ODkzMzJjN2M0MmZjMTA3MjllZGY3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9IFGousfc_G-F8eewOmrv3ehTOh4LumXn4QKtUorOqQ")
     suspend fun getReleasesMovies(): MovieResponse
 
-    @GET("movie/upcoming?language=en-US&page=6")
+    @GET("movie/upcoming?language=en-US&page=1")
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOTFiZmJjYWZhMjgyMmNlMmZlNWUwYzJmNzVmNGUzOCIsIm5iZiI6MTcyMDQ0NDMxOS45MzcxNzgsInN1YiI6IjY2ODkzMzJjN2M0MmZjMTA3MjllZGY3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9IFGousfc_G-F8eewOmrv3ehTOh4LumXn4QKtUorOqQ")
     suspend fun getLastMovie(): MovieResponse
 

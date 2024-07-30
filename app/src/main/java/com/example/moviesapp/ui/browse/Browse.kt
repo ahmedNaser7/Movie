@@ -24,20 +24,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.moviesapp.R
 import com.example.moviesapp.data.model.category.Category
 import com.example.moviesapp.theme.TranspositionGray
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.viewmodel.MovieViewModel
 
 @Composable
-fun Browse(viewModel: MainViewModel,navController: NavController) {
+fun Browse(viewModel: MovieViewModel, navController: NavController) {
     val category by viewModel.categoryTitle.collectAsState()
     Text(
         modifier = Modifier
@@ -114,8 +112,3 @@ fun GridItem(item : Category,navController: NavController) {
     }
 }
 
-@Composable
-@Preview(showSystemUi = true)
-fun PreviewBrowse() {
-    Browse(MainViewModel(), navController = NavController(LocalContext.current))
-}

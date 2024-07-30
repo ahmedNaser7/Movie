@@ -5,13 +5,7 @@ package com.example.moviesapp.ui
 
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
@@ -19,7 +13,6 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -36,21 +28,18 @@ import com.example.moviesapp.navigation.MovieAppNavHost
 import com.example.moviesapp.theme.Black
 import com.example.moviesapp.theme.LightBlack
 import com.example.moviesapp.theme.Orange
-import com.example.moviesapp.ui.Watchlist.Watchlist
-import com.example.moviesapp.ui.browse.Browse
-import com.example.moviesapp.ui.home.Home
-import com.example.moviesapp.ui.search.Search
-import com.example.moviesapp.viewmodel.MainViewModel
+import com.example.moviesapp.ui.screens.MovieAppScreen
+import com.example.moviesapp.viewmodel.MovieViewModel
 
 @Composable
-fun MovieApp(viewModel: MainViewModel) {
+fun MovieApp(viewModel: MovieViewModel) {
     MovieAppContent(viewModel = viewModel)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MovieAppContent(
-    viewModel: MainViewModel
+    viewModel: MovieViewModel
 ) {
     val navController = rememberNavController()
     val selected = remember { mutableStateOf(Icons.Default.Home) }
@@ -116,10 +105,3 @@ fun IconButton(
 }
 
 
-
-
-@Composable
-@Preview(showSystemUi = true)
-fun MovieAppPreview() {
-    MovieApp(MainViewModel())
-}
