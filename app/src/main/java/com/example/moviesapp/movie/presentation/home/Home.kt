@@ -44,6 +44,7 @@ import androidx.navigation.NavController
 import com.example.moviesapp.R
 import com.example.moviesapp.core.data.network.RetrofitInstance.imageUrl
 import com.example.moviesapp.core.domain.model.movie.Movie
+import com.example.moviesapp.core.presentation.LoadingScreen
 import com.example.moviesapp.ui.theme.Black
 import com.example.moviesapp.ui.theme.DarkGray
 import com.example.moviesapp.ui.theme.LightGray
@@ -71,26 +72,17 @@ fun Home(homeState: HomeState) {
 
         LoadingScreen(Modifier.fillMaxSize().align(Alignment.CenterHorizontally),homeState.isLoading)
 
-        if (homeState.isSuccess)
-        RecommendationMovie(homeState.lastMovie)
+        if (homeState.isSuccess) {
+            RecommendationMovie(homeState.lastMovie)
 
-        NewReleasesMovies(homeState.releasesMovies)
+            NewReleasesMovies(homeState.releasesMovies)
 
-        RecommendedMovies(homeState.recommendedMovies)
+            RecommendedMovies(homeState.recommendedMovies)
+        }
 
     }
 }
 
-@Composable
-fun LoadingScreen(modifier: Modifier,loading: Boolean) {
-   if(loading){
-       Box(modifier = modifier, contentAlignment = Alignment.Center){
-           CircularProgressIndicator(
-               color = Yellow
-           )
-       }
-    }
-}
 
 @Composable
 fun RecommendationMovie(lastMovie: Movie) {

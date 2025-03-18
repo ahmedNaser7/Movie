@@ -21,21 +21,21 @@ import com.example.moviesapp.ui.theme.Orange
 @Composable
 fun MovieBottomAppBar(
     selected: MutableState<ImageVector>,
-    currentPage: MutableState<MovieAppScreen>,
+    currentPage: MutableState<MovieScreens>,
     navController: NavHostController,
 ) {
     BottomAppBar(containerColor = LightBlack) {
-        MovieAppScreen.Companion.entries.forEachIndexed { index, screen ->
+        MovieScreens.Companion.entries.forEachIndexed { index, screen ->
             IconButton(
                 modifier = Modifier.weight(1f),
                 selected = selected,
                 currentPage = currentPage,
                 navController = navController,
                 imageVector = when (screen) {
-                    MovieAppScreen.Home -> Icons.Default.Home
-                    MovieAppScreen.Search -> Icons.Default.Search
-                    MovieAppScreen.Browse -> ImageVector.vectorResource(id = R.drawable.icon_browse)
-                    MovieAppScreen.Watchlist -> ImageVector.vectorResource(id = R.drawable.icon_watchlist)
+                    MovieScreens.Home -> Icons.Default.Home
+                    MovieScreens.Search -> Icons.Default.Search
+                    MovieScreens.Browse -> ImageVector.vectorResource(id = R.drawable.icon_browse)
+                    MovieScreens.Watchlist -> ImageVector.vectorResource(id = R.drawable.icon_watchlist)
                     else -> Icons.Default.Home
                 },
                 name = screen.route,
@@ -50,7 +50,7 @@ fun MovieBottomAppBar(
 fun IconButton(
     modifier: Modifier,
     selected: MutableState<ImageVector>,
-    currentPage: MutableState<MovieAppScreen>,
+    currentPage: MutableState<MovieScreens>,
     navController: NavHostController,
     imageVector: ImageVector,
     name: String,
@@ -59,7 +59,7 @@ fun IconButton(
     androidx.compose.material3.IconButton(
         onClick = {
             selected.value = imageVector
-            currentPage.value = MovieAppScreen.Companion.entries[pageState]
+            currentPage.value = MovieScreens.Companion.entries[pageState]
             navController.navigate(currentPage.value.route) { popUpTo(0) }
         },
         modifier = modifier

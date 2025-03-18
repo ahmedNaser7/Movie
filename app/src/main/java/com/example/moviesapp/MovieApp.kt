@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.moviesapp.core.navigation.MovieAppNavHost
 import com.example.moviesapp.core.navigation.MovieBottomAppBar
 import com.example.moviesapp.ui.theme.Black
-import com.example.moviesapp.core.navigation.MovieAppScreen
+import com.example.moviesapp.core.navigation.MovieScreens
 
 @Composable
 fun MovieApp() {
@@ -24,7 +24,7 @@ fun MovieAppContent(
 ) {
     val navController = rememberNavController()
     val selected = remember { mutableStateOf(Icons.Default.Home) }
-    val currentPage = remember { mutableStateOf(MovieAppScreen.Home) }
+    val currentPage = remember { mutableStateOf(MovieScreens.Home) }
 
     Scaffold(
         containerColor = Black,

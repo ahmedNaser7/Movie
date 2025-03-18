@@ -1,6 +1,6 @@
 package com.example.moviesapp.core.navigation
 
-enum class MovieAppScreen(val route: String) {
+enum class MovieScreens(val route: String) {
     Home("home"),
     Search("search"),
     Browse("browse"),
