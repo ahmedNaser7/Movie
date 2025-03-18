@@ -65,6 +65,7 @@ dependencies {
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
     implementation (libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
 
     // test
     testImplementation(libs.junit)
@@ -76,6 +77,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     //third party library
+    implementation(libs.bundles.koin)
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation (libs.logging.interceptor)
